@@ -1,0 +1,159 @@
+window.onscroll = function () { myFunction() };
+
+			var header = document.getElementById("myheader");
+			var sticky = header.offsetTop;
+
+			function myFunction() {
+				if (window.pageYOffset > sticky) {
+					header.classList.add("sticky");
+				} else {
+					header.classList.remove("sticky");
+				}
+			}
+			
+// =================================================================			
+			
+			
+function changesheet(sheet) {
+				document.getElementById('pagestyle').setAttribute('href', sheet); 
+			}
+
+// =====================================================================================
+
+
+$(function () {
+			$('#playButton').hide();
+			$('#carouselExampleIndicators').carousel({
+				interval:2000,
+				pause: "false"
+			});
+			$('#playButton').click(function () {
+				$('#carouselExampleIndicators').carousel('cycle');
+				$('#pauseButton').show();
+				$('#playButton').hide();
+			});
+			$('#pauseButton').click(function () {
+				$('#carouselExampleIndicators').carousel('pause');
+				$('#pauseButton').hide();
+				$('#playButton').show();
+			});
+			});
+		
+
+// ===========================================================================================
+
+
+var text_increace=0;
+			var text_decrease=0;
+			var $affectedElements = $("p,a,li p,h4,h5,h6,li a,.cs-find-search h6,.wp-smartstudy .cs-find-search h6,.cs-label-area label,strong,span,.list_icon li,.tab .nav-tabs li a, span, table, .copyright-text"); // Can be extended, ex. $("div, p, span.someClass")
+   
+         // Storing the original size in a data attribute so size can be reset
+			$affectedElements.each( function(){
+				var $this = $(this);
+				$this.data("orig-size", $this.css("font-size") );
+			});
+   
+			$("#incfont").click(function(){
+			   text_increace++;
+			   changeFontSize(1);
+			})
+   
+			$("#decfont").click(function(){
+				text_decrease++;
+				changeFontSize(-1);
+			})
+   
+			$("#normal").click(function(){
+				$affectedElements.each( function(){
+					var $this = $(this);
+					text_increace=0;
+					text_decrease=0;
+					$this.css( "font-size" , $this.data("orig-size") );
+				});
+			})
+   
+			function changeFontSize(direction){
+				$affectedElements.each( function(){
+					var $this = $(this);
+				if(direction==1)
+				{
+					if(text_increace<=2)
+					{
+						$this.css( "font-size" , parseInt($this.css("font-size"))+direction );
+					}
+				}
+				if(direction==-1)
+				{
+					if(text_decrease<=2)
+					{
+						$this.css( "font-size" , parseInt($this.css("font-size"))+direction );
+					}
+				}
+				});
+			}
+		
+		
+		
+		$("input, label, textarea, form, iframe, h6, h5, h4, h3, h2, h1, p, select, img, .analytics li, .brands_nav").attr("tabindex", "0");
+		
+		
+// ================================================================================
+
+
+$(document).ready(function(){
+
+		if($('.brands_slider').length)
+		{
+			var brandsSlider = $('.brands_slider');
+			brandsSlider.owlCarousel(
+		{
+			loop:true,
+			autoplay:true,
+			autoplayTimeout:1000,
+			nav:false,
+			dots:false,
+			autoWidth:true,
+			items:8,
+			margin:42,
+			//autoplayHoverPause:true
+			
+		});
+
+		if($('.brands_prev').length)
+		{
+			var prev = $('.brands_prev');
+			prev.on('click', function()
+			{
+			brandsSlider.trigger('prev.owl.carousel');
+			});
+		}
+
+		if($('.brands_next').length)
+		{
+			var next = $('.brands_next');
+			next.on('click', function()
+			{
+				brandsSlider.trigger('next.owl.carousel');
+			});
+		}
+		
+		
+		
+		
+		
+		$('.brands_pause').on('click', function(e) {
+			$('.owl-carousel').trigger('stop.owl.autoplay');
+		})
+		$('.brands_play').on('click', function(e) {
+			$('.owl-carousel').trigger('play.owl.autoplay');
+		})
+		
+		
+	}
+	
+		
+
+
+});
+		
+		
